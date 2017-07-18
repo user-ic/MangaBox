@@ -6,12 +6,12 @@ package model;
 
 public class TempBase {
     int end;                //?
-    MangaData[] manga;      //manga list
+    MangaStack[] manga;      //manga list
     int page;               //?
     int start;              //?
     int total;              //manga number
 
-    public TempBase(int end, MangaData[] manga, int page, int start, int total) {
+    public TempBase(int end, MangaStack[] manga, int page, int start, int total) {
         this.end = end;
         this.manga = manga;
         this.page = page;
@@ -23,7 +23,7 @@ public class TempBase {
         return end;
     }
 
-    public MangaData[] getMangaList() {
+    public MangaStack[] getMangaList() {
         return manga;
     }
 

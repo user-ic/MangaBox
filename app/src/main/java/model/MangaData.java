@@ -1,100 +1,243 @@
 package model;
 
 /**
- * Created by Panda on 11-07-2017.
+ * Created by Panda on 13-07-2017.
  */
 
 public class MangaData {
-    String a;       //aka... why not
-    String[] c;     //categories
-    int h;          //number of hits
-    String i;       //id
-    String im;      //img cover
-    String ld;      //last update
-    int s;          //status.. not sure
-    String t;       //title
+    String[] aka;
+    String[] aka_alias;
+    String alias;
+    String artist;
+    String[] artist_kw;
+    String author;
+    String[] author_kw;
+    boolean autoManga;
+    String baka;
+    String categories;
+    ChapterInfo[] chapters;
+    int chapters_len;
+    long created;
+    String description;
+    int hits;
+    String image;
+    String language;
+    long last_chapter_date;
+    String[] random;
+    int released;
+    String startsWith;
+    String title;
+    String title_kw;
+    int type;
+    boolean updatedKeywords;
+    String url;
 
-
-    public MangaData(String im, String t, String i) {
-        this.i = i;
-        this.im = im;
-        this.t = t;
-
-    }
-    public MangaData(String a, String[] c, int h, String i, String im, String ld, int s, String t) {
-        this.a = a;
-        this.c = c;
-        this.h = h;
-        this.i = i;
-        this.im = im;
-        this.ld = ld;
-        this.s = s;
-        this.t = t;
-
-    }
-    public MangaData(){}
-
-    public String getAka() {
-        return a;
+    public String[] getAka() {
+        return aka;
     }
 
-    public String[] getCategories() {
-        return c;
+    public void setAka(String[] aka) {
+        this.aka = aka;
+    }
+
+    public String[] getAka_alias() {
+        return aka_alias;
+    }
+
+    public void setAka_alias(String[] aka_alias) {
+        this.aka_alias = aka_alias;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
+    }
+
+    public String[] getArtist_kw() {
+        return artist_kw;
+    }
+
+    public void setArtist_kw(String[] artist_kw) {
+        this.artist_kw = artist_kw;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String[] getAuthor_kw() {
+        return author_kw;
+    }
+
+    public void setAuthor_kw(String[] author_kw) {
+        this.author_kw = author_kw;
+    }
+
+    public boolean isAutoManga() {
+        return autoManga;
+    }
+
+    public void setAutoManga(boolean autoManga) {
+        this.autoManga = autoManga;
+    }
+
+    public String getBaka() {
+        return baka;
+    }
+
+    public void setBaka(String baka) {
+        this.baka = baka;
+    }
+
+    public String getCategories() {
+        return categories;
+    }
+
+    public void setCategories(String categories) {
+        this.categories = categories;
+    }
+
+    public ChapterInfo[] getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(ChapterInfo[] chapters) {
+        this.chapters = chapters;
+    }
+
+    public int getChapters_len() {
+        return chapters_len;
+    }
+
+    public void setChapters_len(int chapters_len) {
+        this.chapters_len = chapters_len;
+    }
+
+    public long getCreated() {
+        return created;
+    }
+
+    public void setCreated(long created) {
+        this.created = created;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getHits() {
-        return h;
+        return hits;
     }
 
-    public String getId() {
-        return i;
+    public void setHits(int hits) {
+        this.hits = hits;
     }
 
-    public String getCover() {
-        return im;
+    public String getImage() {
+        return image;
     }
 
-    public String getLastUpdate() {
-        return ld;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public int getStatus() {
-        return s;
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public long getLast_chapter_date() {
+        return last_chapter_date;
+    }
+
+    public void setLast_chapter_date(long last_chapter_date) {
+        this.last_chapter_date = last_chapter_date;
+    }
+
+    public String[] getRandom() {
+        return random;
+    }
+
+    public void setRandom(String[] random) {
+        this.random = random;
+    }
+
+    public int getReleased() {
+        return released;
+    }
+
+    public void setReleased(int released) {
+        this.released = released;
+    }
+
+    public String getStartsWith() {
+        return startsWith;
+    }
+
+    public void setStartsWith(String startsWith) {
+        this.startsWith = startsWith;
     }
 
     public String getTitle() {
-        return t;
+        return title;
     }
 
-    public void setAka(String a) {
-        this.a = a;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public void setCategories(String[] c) {
-        this.c = c;
+    public String getTitle_kw() {
+        return title_kw;
     }
 
-    public void setHits(int h) {
-        this.h = h;
+    public void setTitle_kw(String title_kw) {
+        this.title_kw = title_kw;
     }
 
-    public void setId(String i) {
-        this.i = i;
+    public int getType() {
+        return type;
     }
 
-    public void setCover(String im) {
-        this.im = im;
+    public void setType(int type) {
+        this.type = type;
     }
 
-    public void setLastUpdate(String ld) {
-        this.ld = ld;
+    public boolean isUpdatedKeywords() {
+        return updatedKeywords;
     }
 
-    public void setStatus(int s) {
-        this.s = s;
+    public void setUpdatedKeywords(boolean updatedKeywords) {
+        this.updatedKeywords = updatedKeywords;
     }
 
-    public void setTitle(String t) {
-        this.t = t;
+    public String getUrl() {
+        return url;
     }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }

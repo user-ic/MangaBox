@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,23 +11,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
+import com.sylach.mangabox.MangaActivity;
 import com.sylach.mangabox.R;
 
 
-import model.MangaData;
+import model.MangaStack;
 
 /**
  * Created by Panda on 11-07-2017.
  */
 
 public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyViewHolder> {
-    MangaData[] arrayList = null;
+    MangaStack[] arrayMangaStack = null;
     Context context = null;
     int position = 0;
 
-    public MangaListAdapter(Context context, MangaData[] arrayList) {
+    public MangaListAdapter(Context context, MangaStack[] arrayMangaStack) {
         this.context = context;
-        this.arrayList = arrayList;
+        this.arrayMangaStack = arrayMangaStack;
     }
 
     @Override
@@ -36,11 +38,13 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyVi
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
-        final MangaData alObj = arrayList[position];
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+
+        final MangaStack alObj = arrayMangaStack[position];
         this.position = position;
+
         Picasso.with(holder.itemView.getContext())
-                .load(arrayList[(position)].getCover())
+                .load(arrayMangaStack[(position)].getCover())
                 .placeholder(R.drawable.ic_menu_slideshow)
                 .fit()
                 .error(R.drawable.ic_menu_manage)
@@ -48,23 +52,25 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyVi
 
         holder.tvVhTitle.setText(alObj.getTitle());
 
-                 /*
+
         holder.tvVhTitle.setText(alObj.getTitle());
-        holder.ivLiMangaCover.setOnClickListener(new View.OnClickListener() {
+        holder.ivVhCover.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(holder.itemView.getContext().getApplicationContext(), MangaActivity.class);
+                Intent intent = new Intent(context, MangaActivity.class);
+                Bundle bundle = new Bundle();
+
+                bundle.putString("MANGA_ID", arrayMangaStack[position].getId());
+                intent.putExtras(bundle);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("manga_sid", Integer.toString(0));
-                intent.putExtra("manga_id", arrayList.get(position).getId());
-                holder.itemView.getContext().getApplicationContext().startActivity(intent);
+                context.startActivity(intent);
 
 
             }
         });
-        */
+
     }
 
 
@@ -78,15 +84,15 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyVi
 
     @Override
     public int getItemCount() {
-        return arrayList.length;
+        return arrayMangaStack.length;
     }
 
     public int getPosition() {
         return position;
     }
 
-    public void setFilter(MangaData[] list) {
-        arrayList = list;
+    public void setFilter(MangaStack[] list) {
+        arrayMangaStack = list;
         //notifyDataSetChanged();
     }
 

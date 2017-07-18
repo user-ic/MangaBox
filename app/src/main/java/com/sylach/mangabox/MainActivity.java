@@ -2,12 +2,9 @@ package com.sylach.mangabox;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -24,11 +21,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-
 import adapter.MangaListAdapter;
 import model.Endpoint;
-import model.MangaData;
+import model.MangaStack;
 import model.TempBase;
 import volley.RequestManager;
 
@@ -39,7 +34,7 @@ public class MainActivity extends AppCompatActivity
     Boolean exit = false;
     TempBase tempBase;
 
-    MangaData[] mangaData;
+    MangaStack[] mangaStack;
     //
     SwipeRefreshLayout refreshLayoutMain;
     RecyclerView recyclerViewMain;
@@ -52,12 +47,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        //
         GridLayoutManager manager = new GridLayoutManager(this, 3);
         refreshLayoutMain = (SwipeRefreshLayout) findViewById(R.id.refreshLayoutMain);
         recyclerViewMain = (RecyclerView) findViewById(R.id.recyclerViewMain);
         recyclerViewMain.setLayoutManager(manager);
-
         refreshLayoutMain.setOnRefreshListener(MainActivity.this);
         //
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -104,17 +98,17 @@ public class MainActivity extends AppCompatActivity
 
                         Gson gson = new Gson();
                         tempBase = gson.fromJson(response, TempBase.class);
-                        mangaData = new MangaData[tempBase.getMangaList().length];
+                        mangaStack = new MangaStack[tempBase.getMangaList().length];
 
-                        for (int i = 0; i < mangaData.length; i++)
-                            mangaData[i] = new MangaData(
+                        for (int i = 0; i < mangaStack.length; i++)
+                            mangaStack[i] = new MangaStack(
                                     Endpoint.MANGA_EDEN_IMG.getValue() + tempBase.getMangaList()[i].getCover(),
                                     tempBase.getMangaList()[i].getTitle(),
                                     tempBase.getMangaList()[i].getId()
                             );
 
                         refreshLayoutMain.setRefreshing(false);
-                        mangaListAdapter = new MangaListAdapter(getApplicationContext(), mangaData);
+                        mangaListAdapter = new MangaListAdapter(getApplicationContext(), mangaStack);
                         recyclerViewMain.setAdapter(mangaListAdapter);
                     }
                 },
