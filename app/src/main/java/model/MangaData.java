@@ -1,10 +1,13 @@
 package model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Panda on 13-07-2017.
  */
 
-public class MangaData {
+public class MangaData implements Parcelable{
     String[] aka;
     String[] aka_alias;
     String alias;
@@ -31,6 +34,46 @@ public class MangaData {
     int type;
     boolean updatedKeywords;
     String url;
+
+    protected MangaData(Parcel in) {
+        aka = in.createStringArray();
+        aka_alias = in.createStringArray();
+        alias = in.readString();
+        artist = in.readString();
+        artist_kw = in.createStringArray();
+        author = in.readString();
+        author_kw = in.createStringArray();
+        autoManga = in.readByte() != 0;
+        baka = in.readString();
+        categories = in.readString();
+        chapters_len = in.readInt();
+        created = in.readLong();
+        description = in.readString();
+        hits = in.readInt();
+        image = in.readString();
+        language = in.readString();
+        last_chapter_date = in.readLong();
+        random = in.createStringArray();
+        released = in.readInt();
+        startsWith = in.readString();
+        title = in.readString();
+        title_kw = in.readString();
+        type = in.readInt();
+        updatedKeywords = in.readByte() != 0;
+        url = in.readString();
+    }
+
+    public static final Creator<MangaData> CREATOR = new Creator<MangaData>() {
+        @Override
+        public MangaData createFromParcel(Parcel in) {
+            return new MangaData(in);
+        }
+
+        @Override
+        public MangaData[] newArray(int size) {
+            return new MangaData[size];
+        }
+    };
 
     public String[] getAka() {
         return aka;
@@ -240,4 +283,37 @@ public class MangaData {
         this.url = url;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeStringArray(aka);
+        parcel.writeStringArray(aka_alias);
+        parcel.writeString(alias);
+        parcel.writeString(artist);
+        parcel.writeStringArray(artist_kw);
+        parcel.writeString(author);
+        parcel.writeStringArray(author_kw);
+        parcel.writeByte((byte) (autoManga ? 1 : 0));
+        parcel.writeString(baka);
+        parcel.writeString(categories);
+        parcel.writeInt(chapters_len);
+        parcel.writeLong(created);
+        parcel.writeString(description);
+        parcel.writeInt(hits);
+        parcel.writeString(image);
+        parcel.writeString(language);
+        parcel.writeLong(last_chapter_date);
+        parcel.writeStringArray(random);
+        parcel.writeInt(released);
+        parcel.writeString(startsWith);
+        parcel.writeString(title);
+        parcel.writeString(title_kw);
+        parcel.writeInt(type);
+        parcel.writeByte((byte) (updatedKeywords ? 1 : 0));
+        parcel.writeString(url);
+    }
 }

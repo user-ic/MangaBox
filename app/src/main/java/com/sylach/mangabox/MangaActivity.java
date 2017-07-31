@@ -3,6 +3,8 @@ package com.sylach.mangabox;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -17,6 +19,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import adapter.MangaFragmentAdapter;
 import model.ChapterInfo;
 import model.Endpoint;
 import model.MangaData;
@@ -25,6 +28,9 @@ import volley.RequestManager;
 
 public class MangaActivity extends AppCompatActivity {
 
+    FragmentPagerAdapter mangaFragmentAdapter;
+    ViewPager viewPager;
+
     String mangaId = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +38,11 @@ public class MangaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_manga);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
 
         Bundle bundle = getIntent().getExtras();
         mangaId = bundle.getString("MANGA_ID");
+
         getMangaData(
                 String.format("%s%s",
                     Endpoint.MANGA_EDEN_MANGA.getValue(),
@@ -92,6 +100,9 @@ public class MangaActivity extends AppCompatActivity {
                                     )
                             );
                             mangaData.setCategories(cats);
+
+                            mangaFragmentAdapter = new MangaFragmentAdapter(getSupportFragmentManager());
+                            viewPager.setAdapter(mangaFragmentAdapter);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
