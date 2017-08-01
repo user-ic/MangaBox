@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import fragment.ChaptersFragment;
 import fragment.GeneralFragment;
+import model.MangaData;
 
 /**
  * Created by Panda on 20-07-2017.
@@ -23,8 +24,10 @@ public class MangaFragmentAdapter extends FragmentPagerAdapter{
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+
                 return new GeneralFragment();
             case 1:
+
                 return new ChaptersFragment();
             default:
                 return null;

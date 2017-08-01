@@ -30,6 +30,7 @@ public class MangaActivity extends AppCompatActivity {
 
     FragmentPagerAdapter mangaFragmentAdapter;
     ViewPager viewPager;
+    private MangaData mangaData;
 
     String mangaId = null;
     @Override
@@ -43,7 +44,7 @@ public class MangaActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         mangaId = bundle.getString("MANGA_ID");
 
-        getMangaData(
+        requestMangaData(
                 String.format("%s%s",
                     Endpoint.MANGA_EDEN_MANGA.getValue(),
                     mangaId
@@ -51,12 +52,12 @@ public class MangaActivity extends AppCompatActivity {
         );
     }
 
-    public void getMangaData(String url) {
+    public void requestMangaData(String url) {
         final StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        MangaData mangaData = new MangaData();
+                        mangaData = new MangaData();
                         ChapterInfo[] arrChapInfo = null;
                         JSONArray jsonArray;
                         JSONArray injsonChapters;
@@ -117,5 +118,7 @@ public class MangaActivity extends AppCompatActivity {
                 });
         RequestManager.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
     }
-
+    public  MangaData getMangaData(){
+        return mangaData;
+    }
 }

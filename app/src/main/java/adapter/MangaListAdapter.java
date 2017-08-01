@@ -21,7 +21,7 @@ import model.MangaStack;
  * Created by Panda on 11-07-2017.
  */
 
-public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyViewHolder> {
+public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MangaViewHolder> {
     MangaStack[] arrayMangaStack = null;
     Context context = null;
     int position = 0;
@@ -32,13 +32,13 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyVi
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MangaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_manga, parent, false);
-        return new MyViewHolder(view);
+        return new MangaViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, final int position) {
+    public void onBindViewHolder(final MangaViewHolder holder, final int position) {
 
         final MangaStack alObj = arrayMangaStack[position];
         this.position = position;
@@ -96,12 +96,12 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MyVi
         //notifyDataSetChanged();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MangaViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivVhCover;
         TextView tvVhTitle;
 
-        public MyViewHolder(View itemView) {
+        public MangaViewHolder(View itemView) {
             super(itemView);
             ivVhCover = (ImageView) itemView.findViewById(R.id.ivLiMangaCover);
             tvVhTitle = (TextView) itemView.findViewById(R.id.tvLiMangaTitle);

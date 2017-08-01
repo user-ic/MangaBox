@@ -75,6 +75,10 @@ public class MangaData implements Parcelable{
         }
     };
 
+    public MangaData() {
+
+    }
+
     public String[] getAka() {
         return aka;
     }

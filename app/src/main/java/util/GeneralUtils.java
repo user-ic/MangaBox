@@ -27,4 +27,14 @@ public class GeneralUtils {
             return "";
         }
     }
+    public static String FormatTitle(String in){
+        try{
+            Double n = Double.parseDouble(in);
+            return "";
+        }catch (Exception ex){
+        }
+        if(in.length() > 0 && !in.equals(null) && !in.equals(false) && !in.equals("null"))
+            return  in;
+        return "";
+    }
 }
