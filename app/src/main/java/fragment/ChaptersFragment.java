@@ -54,7 +54,7 @@ public class ChaptersFragment extends Fragment {
                 GeneralUtils.FormatTitle(rawChapters[i].getTitle()),
                 rawChapters[i].getId()
             );
-        Collections.reverse(Arrays.asList(chapters));
+        //Collections.reverse(Arrays.asList(chapters));
         chapterAdapter = new ChapterAdapter(chapters, mangaActivity);
         recyclerViewChapters.setLayoutManager(linearLayoutManager);
         recyclerViewChapters.setAdapter(chapterAdapter);

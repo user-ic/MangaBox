@@ -1,5 +1,7 @@
 package adapter;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +12,7 @@ import android.widget.Toast;
 
 import com.sylach.mangacube.MangaActivity;
 import com.sylach.mangacube.R;
+import com.sylach.mangacube.ReadActivity;
 
 import model.ChapterInfo;
 
@@ -64,17 +67,21 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                         Integer.toString(mangaDataMC.getChapters().size()));
 */
 
-             /*
-                Intent intent = new Intent(getActivity(), ReadActivity.class);
+
+                Intent intent = new Intent(mangaActivity, ReadActivity.class);
                 Bundle b = new Bundle();
-                b.putString("manga_id", mangaDataMC.getId());
-                b.putString("source_id", MangaActivity.manga_sid);
+                b.putString("m_id", mangaActivity.getMangaId());
+                b.putString("s_id", mangaActivity.getSourceId());
                 b.putInt("position", position);
-                // b.putParcelable("manga_common", mangaDataMC);
-                b.putInt("chap_total", arlData.size());
+                b.putParcelable("m_data", mangaActivity.getMangaData());
+
                 intent.putExtras(b);
-                startActivity(intent);
-                */
+
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mangaActivity
+                        .getApplicationContext()
+                        .startActivity(intent);
+
                 Toast.makeText(mangaActivity.getApplicationContext(), mangaActivity.getMangaId(), Toast.LENGTH_LONG).show();
             }
         });

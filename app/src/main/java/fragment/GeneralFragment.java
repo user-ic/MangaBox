@@ -51,10 +51,11 @@ public class GeneralFragment extends Fragment {
 
         localDB = new DatabaseConn(getContext());
 
-        //
+        //...
+        //idealy this info would have been loaded from the server
+
         if(localDB.entryExists(mangaId, sourceId))
             handleFavoriteUI(0, 1);
-
         else
             handleFavoriteUI(0, 2);
 
