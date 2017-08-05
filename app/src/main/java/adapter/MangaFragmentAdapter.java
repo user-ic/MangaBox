@@ -6,7 +6,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 import fragment.ChaptersFragment;
 import fragment.GeneralFragment;
-import model.MangaData;
 
 /**
  * Created by Panda on 20-07-2017.

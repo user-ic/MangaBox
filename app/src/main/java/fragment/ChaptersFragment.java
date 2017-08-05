@@ -1,7 +1,5 @@
 package fragment;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,12 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.sylach.mangabox.MangaActivity;
-import com.sylach.mangabox.R;
+import com.sylach.mangacube.MangaActivity;
+import com.sylach.mangacube.R;
+
+import java.util.Arrays;
+import java.util.Collections;
 
 import adapter.ChapterListAdapter;
 import model.ChapterInfo;
-import model.MangaData;
 import util.GeneralUtils;
 
 
@@ -54,6 +54,7 @@ public class ChaptersFragment extends Fragment {
                 GeneralUtils.FormatTitle(rawChapters[i].getTitle()),
                 rawChapters[i].getId()
             );
+        Collections.reverse(Arrays.asList(chapters));
         chapterListAdapter = new ChapterListAdapter(chapters);
         recyclerViewChapters.setLayoutManager(linearLayoutManager);
         recyclerViewChapters.setAdapter(chapterListAdapter);

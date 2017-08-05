@@ -5,19 +5,19 @@ package model;
  */
 
 public class ChapterInfo{
-    int number;
+    String number;
     String date;
     String title;
     String id;
 
-    public ChapterInfo(int number, String date, String title, String id) {
+    public ChapterInfo(String number, String date, String title, String id) {
         this.number = number;
         this.date = date;
         this.title = title;
         this.id = id;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
@@ -34,7 +34,7 @@ public class ChapterInfo{
     }
 
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 

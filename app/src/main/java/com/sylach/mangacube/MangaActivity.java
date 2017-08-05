@@ -1,13 +1,10 @@
-package com.sylach.mangabox;
+package com.sylach.mangacube;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -79,7 +76,7 @@ public class MangaActivity extends AppCompatActivity {
 
                                 injsonChapters = jsonChapters.getJSONArray(i);
                                 arrChapInfo[i] = new ChapterInfo(
-                                        Integer.parseInt(injsonChapters.get(0).toString()),
+                                        injsonChapters.get(0).toString(),
                                         GeneralUtils.FormatToHumanDate(injsonChapters.get(1).toString()),
                                         injsonChapters.get(2).toString(),
                                         injsonChapters.get(3).toString()

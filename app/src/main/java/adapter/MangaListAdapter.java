@@ -11,9 +11,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.sylach.mangabox.MangaActivity;
-import com.sylach.mangabox.R;
+import com.sylach.mangacube.MangaActivity;
+import com.sylach.mangacube.R;
 
+import java.util.ArrayList;
 
 import model.MangaStack;
 
@@ -22,11 +23,11 @@ import model.MangaStack;
  */
 
 public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MangaViewHolder> {
-    MangaStack[] arrayMangaStack = null;
+    ArrayList<MangaStack> arrayMangaStack = null;
     Context context = null;
     int position = 0;
 
-    public MangaListAdapter(Context context, MangaStack[] arrayMangaStack) {
+    public MangaListAdapter(Context context, ArrayList<MangaStack> arrayMangaStack) {
         this.context = context;
         this.arrayMangaStack = arrayMangaStack;
     }
@@ -40,11 +41,11 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.Mang
     @Override
     public void onBindViewHolder(final MangaViewHolder holder, final int position) {
 
-        final MangaStack alObj = arrayMangaStack[position];
+        final MangaStack alObj = arrayMangaStack.get(position);
         this.position = position;
 
         Picasso.with(holder.itemView.getContext())
-                .load(arrayMangaStack[(position)].getCover())
+                .load(alObj.getCover())
                 .placeholder(R.drawable.ic_menu_slideshow)
                 .fit()
                 .error(R.drawable.ic_menu_manage)
@@ -53,7 +54,6 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.Mang
         holder.tvVhTitle.setText(alObj.getTitle());
 
 
-        holder.tvVhTitle.setText(alObj.getTitle());
         holder.ivVhCover.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -62,7 +62,7 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.Mang
                 Intent intent = new Intent(context, MangaActivity.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putString("MANGA_ID", arrayMangaStack[position].getId());
+                bundle.putString("MANGA_ID", arrayMangaStack.get(position).getId());
                 intent.putExtras(bundle);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
@@ -84,14 +84,14 @@ public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.Mang
 
     @Override
     public int getItemCount() {
-        return arrayMangaStack.length;
+        return arrayMangaStack.size();
     }
 
     public int getPosition() {
         return position;
     }
 
-    public void setFilter(MangaStack[] list) {
+    public void setFilter(ArrayList<MangaStack> list) {
         arrayMangaStack = list;
         //notifyDataSetChanged();
     }

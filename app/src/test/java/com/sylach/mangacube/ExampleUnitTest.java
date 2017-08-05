@@ -1,4 +1,4 @@
-package com.sylach.mangabox;
+package com.sylach.mangacube;
 
 import org.junit.Test;
 

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sylach.mangabox.R;
+import com.sylach.mangacube.R;
 
 import model.ChapterInfo;
 
@@ -47,7 +47,7 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
     public void onBindViewHolder(ChapterViewHolder holder, final int position) {
 
         final ChapterInfo alObj = arlData[position];
-       // holder.getTvVhNum().setText(alObj.getNumber());
+        holder.getTvVhNum().setText(alObj.getNumber());
         holder.getTvVhTitle().setText(alObj.getTitle());
         holder.getTvVhDate().setText(alObj.getDate());
         holder.getLiliChap().setOnClickListener(new View.OnClickListener() {
@@ -95,7 +95,7 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
 
         public ChapterViewHolder(View itemView, TextView tvVhNum, TextView tvVhTitle, TextView tvVhDate, LinearLayout liliChap) {
             super(itemView);
-            //this.tvVhNum = tvVhNum;
+            this.tvVhNum = tvVhNum;
             this.tvVhTitle = tvVhTitle;
             this.tvVhDate = tvVhDate;
             this.liliChap = liliChap;

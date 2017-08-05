@@ -1,10 +1,16 @@
-package com.sylach.mangabox;
+package com.sylach.mangacube;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
+import android.view.MenuInflater;
+import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -21,20 +27,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
 import adapter.MangaListAdapter;
 import model.Endpoint;
 import model.MangaStack;
 import model.TempBase;
 import volley.RequestManager;
 
+
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, SwipeRefreshLayout.OnRefreshListener {
+        implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
 
 
     Boolean exit = false;
     TempBase tempBase;
 
-    MangaStack[] mangaStack;
+    ArrayList<MangaStack> mangaStack;
     //
     SwipeRefreshLayout refreshLayoutMain;
     RecyclerView recyclerViewMain;
@@ -98,14 +107,14 @@ public class MainActivity extends AppCompatActivity
 
                         Gson gson = new Gson();
                         tempBase = gson.fromJson(response, TempBase.class);
-                        mangaStack = new MangaStack[tempBase.getMangaList().length];
+                        mangaStack = new ArrayList<>();
 
-                        for (int i = 0; i < mangaStack.length; i++)
-                            mangaStack[i] = new MangaStack(
+                        for (int i = 0; i < tempBase.getMangaList().length; i++)
+                            mangaStack.add(new MangaStack(
                                     Endpoint.MANGA_EDEN_IMG.getValue() + tempBase.getMangaList()[i].getCover(),
                                     tempBase.getMangaList()[i].getTitle(),
                                     tempBase.getMangaList()[i].getId()
-                            );
+                            ));
 
                         refreshLayoutMain.setRefreshing(false);
                         mangaListAdapter = new MangaListAdapter(getApplicationContext(), mangaStack);
@@ -125,25 +134,23 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_search, menu);
+        MenuItem item = menu.findItem(R.id.itemSearch);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(item);
+        searchView.setOnQueryTextListener(this);
+
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         return super.onOptionsItemSelected(item);
     }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -180,5 +187,27 @@ public class MainActivity extends AppCompatActivity
                 //getContentRequest(ReadableOnly.MEDEN_0EN);
             }}, 1500);
         */
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) throws NullPointerException{
+        if(mangaStack != null && mangaStack.size() > 0){
+            newText = newText.toLowerCase();
+            ArrayList<MangaStack> newList = new ArrayList<MangaStack>();
+
+            for(MangaStack mgc : mangaStack){
+                String name = mgc.getTitle().toLowerCase();
+                if(name.contains(newText))
+                    newList.add(mgc);
+            }
+            mangaListAdapter.setFilter(newList);
+            recyclerViewMain.setAdapter(mangaListAdapter);
+        }
+        return true;
     }
 }
