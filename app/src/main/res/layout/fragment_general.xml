@@ -64,7 +64,6 @@
                 android:orientation="vertical">
                 <Button
                     android:id="@+id/btBkm"
-                    android:text="f"
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:textSize="20dp"

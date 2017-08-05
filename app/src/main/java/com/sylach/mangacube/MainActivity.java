@@ -2,15 +2,12 @@ package com.sylach.mangacube;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.view.MenuInflater;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -29,7 +26,7 @@ import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
-import adapter.MangaListAdapter;
+import adapter.MangaAdapter;
 import model.Endpoint;
 import model.MangaStack;
 import model.TempBase;
@@ -40,14 +37,14 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, SearchView.OnQueryTextListener, SwipeRefreshLayout.OnRefreshListener {
 
 
-    Boolean exit = false;
-    TempBase tempBase;
+    private Boolean exit = false;
+    private TempBase tempBase;
 
-    ArrayList<MangaStack> mangaStack;
+    private ArrayList<MangaStack> mangaStack;
     //
-    SwipeRefreshLayout refreshLayoutMain;
-    RecyclerView recyclerViewMain;
-    MangaListAdapter mangaListAdapter;
+    private SwipeRefreshLayout refreshLayoutMain;
+    private RecyclerView recyclerViewMain;
+    private MangaAdapter mangaAdapter;
 
 
     @Override
@@ -61,7 +58,15 @@ public class MainActivity extends AppCompatActivity
         refreshLayoutMain = (SwipeRefreshLayout) findViewById(R.id.refreshLayoutMain);
         recyclerViewMain = (RecyclerView) findViewById(R.id.recyclerViewMain);
         recyclerViewMain.setLayoutManager(manager);
+
         refreshLayoutMain.setOnRefreshListener(MainActivity.this);
+        /*
+        refreshLayoutMain.setColorSchemeColors(
+
+                R.color.deep_purple_500, R.color.pink_500, R.color.orange_500, R.color.brown_500,
+                R.color.indigo_500, R.color.blue_500, R.color.teal_500, R.color.green_500
+        );
+        */
         //
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -116,9 +121,9 @@ public class MainActivity extends AppCompatActivity
                                     tempBase.getMangaList()[i].getId()
                             ));
 
+                        mangaAdapter = new MangaAdapter(getApplicationContext(), mangaStack);
+                        recyclerViewMain.setAdapter(mangaAdapter);
                         refreshLayoutMain.setRefreshing(false);
-                        mangaListAdapter = new MangaListAdapter(getApplicationContext(), mangaStack);
-                        recyclerViewMain.setAdapter(mangaListAdapter);
                     }
                 },
                 new Response.ErrorListener() {
@@ -205,8 +210,8 @@ public class MainActivity extends AppCompatActivity
                 if(name.contains(newText))
                     newList.add(mgc);
             }
-            mangaListAdapter.setFilter(newList);
-            recyclerViewMain.setAdapter(mangaListAdapter);
+            mangaAdapter.setFilter(newList);
+            recyclerViewMain.setAdapter(mangaAdapter);
         }
         return true;
     }

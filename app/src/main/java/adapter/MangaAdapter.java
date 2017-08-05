@@ -22,12 +22,12 @@ import model.MangaStack;
  * Created by Panda on 11-07-2017.
  */
 
-public class MangaListAdapter extends RecyclerView.Adapter<MangaListAdapter.MangaViewHolder> {
+public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder> {
     ArrayList<MangaStack> arrayMangaStack = null;
     Context context = null;
     int position = 0;
 
-    public MangaListAdapter(Context context, ArrayList<MangaStack> arrayMangaStack) {
+    public MangaAdapter(Context context, ArrayList<MangaStack> arrayMangaStack) {
         this.context = context;
         this.arrayMangaStack = arrayMangaStack;
     }

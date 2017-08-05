@@ -29,7 +29,9 @@ public class MangaActivity extends AppCompatActivity {
     ViewPager viewPager;
     private MangaData mangaData;
 
-    String mangaId = null;
+    private String mangaId = null;
+
+    private String sourceId = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +42,8 @@ public class MangaActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         mangaId = bundle.getString("MANGA_ID");
-
+        //sourceId = bundle.getString("SOURCE_ID");
+        sourceId = "0";
         requestMangaData(
                 String.format("%s%s",
                     Endpoint.MANGA_EDEN_MANGA.getValue(),
@@ -118,4 +121,13 @@ public class MangaActivity extends AppCompatActivity {
     public  MangaData getMangaData(){
         return mangaData;
     }
+
+    public  String getMangaId(){
+        return mangaId;
+    }
+
+    public String getSourceId() {
+        return sourceId;
+    }
+
 }

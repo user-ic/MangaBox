@@ -15,7 +15,7 @@ import com.sylach.mangacube.R;
 import java.util.Arrays;
 import java.util.Collections;
 
-import adapter.ChapterListAdapter;
+import adapter.ChapterAdapter;
 import model.ChapterInfo;
 import util.GeneralUtils;
 
@@ -24,7 +24,7 @@ public class ChaptersFragment extends Fragment {
 
 
     private RecyclerView recyclerViewChapters;
-    private ChapterListAdapter chapterListAdapter;
+    private ChapterAdapter chapterAdapter;
     private LinearLayout liChapter;
     private MangaActivity mangaActivity;
     private LinearLayoutManager linearLayoutManager;
@@ -55,9 +55,9 @@ public class ChaptersFragment extends Fragment {
                 rawChapters[i].getId()
             );
         Collections.reverse(Arrays.asList(chapters));
-        chapterListAdapter = new ChapterListAdapter(chapters);
+        chapterAdapter = new ChapterAdapter(chapters, mangaActivity);
         recyclerViewChapters.setLayoutManager(linearLayoutManager);
-        recyclerViewChapters.setAdapter(chapterListAdapter);
+        recyclerViewChapters.setAdapter(chapterAdapter);
 
         return view;
     }

@@ -6,7 +6,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.sylach.mangacube.MangaActivity;
 import com.sylach.mangacube.R;
 
 import model.ChapterInfo;
@@ -16,19 +18,16 @@ import model.ChapterInfo;
  */
 
 
-public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.ChapterViewHolder> {
+public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder> {
     ChapterInfo[] arlData = null;
-
-    public ChapterListAdapter(ChapterInfo[] arlData) {
+    MangaActivity mangaActivity = null;
+    public ChapterAdapter(ChapterInfo[] arlData, MangaActivity mangaActivity) {
         this.arlData = arlData;
+        this.mangaActivity = mangaActivity;
     }
 
     public ChapterInfo[] getArlData() {
         return arlData;
-    }
-
-    public void setArlData(ChapterInfo[] arlData) {
-        this.arlData = arlData;
     }
 
     @Override
@@ -76,6 +75,7 @@ public class ChapterListAdapter extends RecyclerView.Adapter<ChapterListAdapter.
                 intent.putExtras(b);
                 startActivity(intent);
                 */
+                Toast.makeText(mangaActivity.getApplicationContext(), mangaActivity.getMangaId(), Toast.LENGTH_LONG).show();
             }
         });
 

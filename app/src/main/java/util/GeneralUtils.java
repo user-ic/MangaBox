@@ -1,9 +1,11 @@
 package util;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Panda on 18-07-2017.
@@ -36,5 +38,11 @@ public class GeneralUtils {
         if(in.length() > 0 && !in.equals(null) && !in.equals(false) && !in.equals("null"))
             return  in;
         return "";
+    }
+    public static String GetDateTime() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+        Date date = new Date();
+        return dateFormat.format(date);
     }
 }
