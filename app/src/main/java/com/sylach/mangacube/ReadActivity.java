@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.ArrayList;
+
+import model.ChapterInfo;
 import model.Endpoint;
 import model.MangaData;
 
@@ -14,7 +17,7 @@ public class ReadActivity extends AppCompatActivity {
     private String sourceId;
     private String chapterId;
     private int chapterPosition;
-
+    private ArrayList<ChapterInfo> chaptersData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +30,8 @@ public class ReadActivity extends AppCompatActivity {
         mangaId = b.getString("m_id");
         mangaData = b.getParcelable("m_data");
         chapterPosition = b.getInt("position");
-
-        chapterId = mangaData.getChapters()[chapterPosition].getId();
+        chaptersData = b.getParcelableArrayList("c_data");
+       // chapterId = mangaData.getChapters()chapterPosition].getId();
 
         requestChapterPages(
             String.format("%s%s",

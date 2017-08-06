@@ -27,7 +27,10 @@
             android:name=".MangaActivity"
             android:label="@string/title_activity_manga"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity android:name=".ReadActivity"></activity>
+
+        <activity
+            android:name=".ReadActivity"
+            android:theme="@style/AppTheme.ReadActionBar" />
     </application>
 
 </manifest>

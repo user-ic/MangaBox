@@ -1,10 +1,13 @@
 package model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by Panda on 18-07-2017.
  */
 
-public class ChapterInfo{
+public class ChapterInfo implements Parcelable{
     String number;
     String date;
     String title;
@@ -16,6 +19,25 @@ public class ChapterInfo{
         this.title = title;
         this.id = id;
     }
+
+    protected ChapterInfo(Parcel in) {
+        number = in.readString();
+        date = in.readString();
+        title = in.readString();
+        id = in.readString();
+    }
+
+    public static final Creator<ChapterInfo> CREATOR = new Creator<ChapterInfo>() {
+        @Override
+        public ChapterInfo createFromParcel(Parcel in) {
+            return new ChapterInfo(in);
+        }
+
+        @Override
+        public ChapterInfo[] newArray(int size) {
+            return new ChapterInfo[size];
+        }
+    };
 
     public String getNumber() {
         return number;
@@ -48,5 +70,18 @@ public class ChapterInfo{
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(number);
+        parcel.writeString(date);
+        parcel.writeString(title);
+        parcel.writeString(id);
     }
 }

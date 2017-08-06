@@ -3,6 +3,8 @@ package model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 /**
  * Created by Panda on 13-07-2017.
  */
@@ -18,7 +20,7 @@ public class MangaData implements Parcelable{
     boolean autoManga;
     String baka;
     String categories;
-    ChapterInfo[] chapters;
+    ArrayList<ChapterInfo> chapters;
     int chapters_len;
     long created;
     String description;
@@ -36,6 +38,7 @@ public class MangaData implements Parcelable{
     String url;
 
     protected MangaData(Parcel in) {
+        this();
         aka = in.createStringArray();
         aka_alias = in.createStringArray();
         alias = in.readString();
@@ -47,6 +50,7 @@ public class MangaData implements Parcelable{
         baka = in.readString();
         categories = in.readString();
         chapters_len = in.readInt();
+        //in.readArrayList(chapters, ArrayList<ChapterInfo>());
         created = in.readLong();
         description = in.readString();
         hits = in.readInt();
@@ -61,6 +65,7 @@ public class MangaData implements Parcelable{
         type = in.readInt();
         updatedKeywords = in.readByte() != 0;
         url = in.readString();
+
     }
 
     public static final Creator<MangaData> CREATOR = new Creator<MangaData>() {
@@ -76,7 +81,7 @@ public class MangaData implements Parcelable{
     };
 
     public MangaData() {
-
+        chapters = new ArrayList<ChapterInfo>();
     }
 
     public String[] getAka() {
@@ -159,11 +164,11 @@ public class MangaData implements Parcelable{
         this.categories = categories;
     }
 
-    public ChapterInfo[] getChapters() {
+    public ArrayList<ChapterInfo> getChapters() {
         return chapters;
     }
 
-    public void setChapters(ChapterInfo[] chapters) {
+    public void setChapters(ArrayList<ChapterInfo> chapters) {
         this.chapters = chapters;
     }
 

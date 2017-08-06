@@ -12,11 +12,13 @@ import android.widget.LinearLayout;
 import com.sylach.mangacube.MangaActivity;
 import com.sylach.mangacube.R;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
 import adapter.ChapterAdapter;
 import model.ChapterInfo;
+import model.MangaData;
 import util.GeneralUtils;
 
 
@@ -27,8 +29,9 @@ public class ChaptersFragment extends Fragment {
     private ChapterAdapter chapterAdapter;
     private LinearLayout liChapter;
     private MangaActivity mangaActivity;
+    private MangaData mangaData;
     private LinearLayoutManager linearLayoutManager;
-    private ChapterInfo[] chapters = null;
+    private ArrayList<ChapterInfo> chapters = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,19 +44,20 @@ public class ChaptersFragment extends Fragment {
         recyclerViewChapters = (RecyclerView) view.findViewById(R.id.recyclerViewChapters);
         mangaActivity = (MangaActivity) getActivity();
 
-        ChapterInfo[] rawChapters = mangaActivity
+        mangaData = mangaActivity.getMangaData();
+        ArrayList<ChapterInfo> rawChapters = mangaActivity
                         .getMangaData()
                         .getChapters();
 
-        chapters = new ChapterInfo[rawChapters.length];
+        chapters = new ArrayList<ChapterInfo> ();
 
-        for(int i = 0; i < rawChapters.length; i++)
-            chapters[i] = new ChapterInfo(
-                rawChapters[i].getNumber(),
-                GeneralUtils.FormatToHumanDate(rawChapters[i].getDate()),
-                GeneralUtils.FormatTitle(rawChapters[i].getTitle()),
-                rawChapters[i].getId()
-            );
+        for(int i = 0; i < rawChapters.size(); i++)
+            chapters.add(new ChapterInfo(
+                rawChapters.get(i).getNumber(),
+                GeneralUtils.FormatToHumanDate(rawChapters.get(i).getDate()),
+                GeneralUtils.FormatTitle(rawChapters.get(i).getTitle()),
+                rawChapters.get(i).getId()
+            ));
         //Collections.reverse(Arrays.asList(chapters));
         chapterAdapter = new ChapterAdapter(chapters, mangaActivity);
         recyclerViewChapters.setLayoutManager(linearLayoutManager);

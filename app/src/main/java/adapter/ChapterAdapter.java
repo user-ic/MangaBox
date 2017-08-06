@@ -14,6 +14,8 @@ import com.sylach.mangacube.MangaActivity;
 import com.sylach.mangacube.R;
 import com.sylach.mangacube.ReadActivity;
 
+import java.util.ArrayList;
+
 import model.ChapterInfo;
 
 /**
@@ -22,14 +24,14 @@ import model.ChapterInfo;
 
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterViewHolder> {
-    ChapterInfo[] arlData = null;
+    ArrayList<ChapterInfo> arlData = null;
     MangaActivity mangaActivity = null;
-    public ChapterAdapter(ChapterInfo[] arlData, MangaActivity mangaActivity) {
+    public ChapterAdapter(ArrayList<ChapterInfo> arlData, MangaActivity mangaActivity) {
         this.arlData = arlData;
         this.mangaActivity = mangaActivity;
     }
 
-    public ChapterInfo[] getArlData() {
+    public ArrayList<ChapterInfo> getArlData() {
         return arlData;
     }
 
@@ -37,10 +39,10 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     public ChapterViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.li_chapter, parent, false);
-        TextView tvliNum = (TextView) v.findViewById(R.id.tvliNum);
-        TextView tvliTitle = (TextView) v.findViewById(R.id.tvliTitle);
-        TextView tvliDate = (TextView) v.findViewById(R.id.tvliDate);
-        LinearLayout liliChap = (LinearLayout) v.findViewById(R.id.liChapter);
+        TextView tvliNum = v.findViewById(R.id.tvliNum);
+        TextView tvliTitle = v.findViewById(R.id.tvliTitle);
+        TextView tvliDate = v.findViewById(R.id.tvliDate);
+        LinearLayout liliChap = v.findViewById(R.id.liChapter);
 
         return new ChapterViewHolder(v, tvliNum, tvliTitle, tvliDate, liliChap);
     }
@@ -48,7 +50,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
     @Override
     public void onBindViewHolder(ChapterViewHolder holder, final int position) {
 
-        final ChapterInfo alObj = arlData[position];
+        final ChapterInfo alObj = arlData.get(position);
         holder.getTvVhNum().setText(alObj.getNumber());
         holder.getTvVhTitle().setText(alObj.getTitle());
         holder.getTvVhDate().setText(alObj.getDate());
@@ -74,6 +76,8 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                 b.putString("s_id", mangaActivity.getSourceId());
                 b.putInt("position", position);
                 b.putParcelable("m_data", mangaActivity.getMangaData());
+                b.putParcelableArrayList("c_data", arlData);
+             //   b.putParcelableArray();
 
                 intent.putExtras(b);
 
@@ -90,7 +94,7 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
 
     @Override
     public int getItemCount() {
-        return arlData.length;
+        return arlData.size();
     }
 
     public class ChapterViewHolder extends RecyclerView.ViewHolder {

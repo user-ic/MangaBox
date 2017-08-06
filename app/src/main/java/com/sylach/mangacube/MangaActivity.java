@@ -16,6 +16,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 import adapter.MangaFragmentAdapter;
 import model.ChapterInfo;
 import model.Endpoint;
@@ -58,7 +60,7 @@ public class MangaActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String response) {
                         mangaData = new MangaData();
-                        ChapterInfo[] arrChapInfo = null;
+                        ArrayList<ChapterInfo> arrChapInfo = null;
                         JSONArray jsonArray;
                         JSONArray injsonChapters;
                         JSONArray jsonChapters;
@@ -73,17 +75,17 @@ public class MangaActivity extends AppCompatActivity {
                             mangaData.setDescription(json.getString("description"));
                             mangaData.setChapters_len(json.getInt("chapters_len"));
 
-                            arrChapInfo = new ChapterInfo[mangaData.getChapters_len()];
+                            arrChapInfo = new ArrayList<>();
 
                             for (int i = 0; i < mangaData.getChapters_len(); i++) {
 
                                 injsonChapters = jsonChapters.getJSONArray(i);
-                                arrChapInfo[i] = new ChapterInfo(
+                                arrChapInfo.add(new ChapterInfo(
                                         injsonChapters.get(0).toString(),
                                         GeneralUtils.FormatToHumanDate(injsonChapters.get(1).toString()),
                                         injsonChapters.get(2).toString(),
                                         injsonChapters.get(3).toString()
-                                );
+                                ));
                             }
                             mangaData.setChapters(arrChapInfo);
                             jsonArray = json.getJSONArray("categories");
