@@ -44,8 +44,12 @@ public class GeneralFragment extends Fragment {
         tvGDesc = (TextView) view.findViewById(R.id.tvGDesc);
         tvGCat = (TextView) view.findViewById(R.id.tvGCat);
         tvGTitle = (TextView) view.findViewById(R.id.tvGTitle);
+try {
 
-        tvGCat.setText(mangaData.getCategories());
+    tvGCat.setText(mangaData.getCategories());
+}catch (Exception e){
+
+}
         tvGTitle.setText(mangaData.getTitle());
         tvGDesc.setText(mangaData.getDescription());
 

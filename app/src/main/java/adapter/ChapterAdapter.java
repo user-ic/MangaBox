@@ -68,25 +68,19 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChapterV
                         Integer.toString(position),
                         Integer.toString(mangaDataMC.getChapters().size()));
 */
-
-
                 Intent intent = new Intent(mangaActivity, ReadActivity.class);
                 Bundle b = new Bundle();
+
                 b.putString("m_id", mangaActivity.getMangaId());
                 b.putString("s_id", mangaActivity.getSourceId());
                 b.putInt("position", position);
                 b.putParcelable("m_data", mangaActivity.getMangaData());
                 b.putParcelableArrayList("c_data", arlData);
-             //   b.putParcelableArray();
 
                 intent.putExtras(b);
-
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mangaActivity
-                        .getApplicationContext()
-                        .startActivity(intent);
 
-                Toast.makeText(mangaActivity.getApplicationContext(), mangaActivity.getMangaId(), Toast.LENGTH_LONG).show();
+                mangaActivity.getApplicationContext().startActivity(intent);
             }
         });
 
