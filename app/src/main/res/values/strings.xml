@@ -9,6 +9,9 @@
     <string name="btnBkDel">-</string>
     <string name="btnBkAdd">+</string>
 
+    <!--     toasts  -->
+    <string name="lastPage">Last page reached</string>
+
     <!--             -->
     <string name="action_settings">Settings</string>
     <string name="menuSearchTitle">Search</string>

@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -31,17 +32,18 @@ public class ReaderAdapter extends PagerAdapter {
     private Context context;
     private String[] IMAGES = null;
     private View view;
-    private RelativeLayout rlTop, rlBottom;
+    private RelativeLayout rlBottom;
     private TextView tvCMenu;
+    private Toolbar toolbar;
 
-    public ReaderAdapter(Context context, String[] IMAGES, RelativeLayout rlTop, RelativeLayout rlBottom, TextView tvCMenu) {
+    public ReaderAdapter(Context context, String[] IMAGES, Toolbar toolbar, RelativeLayout rlBottom, TextView tvCMenu) {
         this.IMAGES = IMAGES;
         this.context = context;
-        this.rlTop = rlTop;
         this.rlBottom = rlBottom;
         this.tvCMenu = tvCMenu;
+        this.toolbar = toolbar;
 
-        this.rlTop.setVisibility(View.VISIBLE);
+        this.toolbar.setVisibility(View.VISIBLE);
         this.rlBottom.setVisibility(View.VISIBLE);
     }
 
@@ -128,14 +130,14 @@ public class ReaderAdapter extends PagerAdapter {
                         if(fingerState != FINGER_DRAGGING)
                         {
                             fingerState = FINGER_RELEASED;
-                            if(rlBottom.getVisibility() == View.VISIBLE && rlTop.getVisibility() == View.VISIBLE)
+                            if(rlBottom.getVisibility() == View.VISIBLE && toolbar.getVisibility() == View.VISIBLE)
                             {
-                                rlTop.setVisibility(View.GONE);
+                                toolbar.setVisibility(View.GONE);
                                 rlBottom.setVisibility(View.GONE);
                             }
                             else
                             {
-                                rlTop.setVisibility(View.VISIBLE);
+                                toolbar.setVisibility(View.VISIBLE);
                                 rlBottom.setVisibility(View.VISIBLE);
                             }
                         }
@@ -160,7 +162,7 @@ public class ReaderAdapter extends PagerAdapter {
         Handler handlerTimer = new Handler();
         handlerTimer.postDelayed(new Runnable(){
             public void run() {
-                rlTop.setVisibility(View.GONE);
+                toolbar.setVisibility(View.GONE);
                 rlBottom.setVisibility(View.GONE);
             }}, 4000);
 
